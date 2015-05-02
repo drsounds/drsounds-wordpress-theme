@@ -11,6 +11,9 @@
         <script src="<?php echo bloginfo('stylesheet_directory')?>/js/main.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
+        * {
+          box-sizing: border-box !important;
+        }
         .icon {
             font-size: 55pt;
         }
@@ -26,8 +29,14 @@
         .menu-item {
           text-transform: uppercase;
         }
-        .navbar-transparent .nav li a {
+        .navbar-transparent .nav li a, .navbar-transparent .navbar-brand {
           color: white;
+        }
+        .navbar-transparent .nav li a:hover {
+          background-color: none !important;
+        }
+        .navbar-transparent .nav li a:hover {
+          font-weight: bold !important;
         }
         .navbar {
           transition: background-color 1s, color 1s;
