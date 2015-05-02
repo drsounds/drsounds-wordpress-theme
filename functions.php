@@ -228,7 +228,7 @@ $settings = array(
     )
 );
 
-function drsounds_glass($background_image_url) {
+function drsounds_glass($background_image_url, $page = 'about') {
     ?><div class="glass glass-default" style="overflow: hidden;padding-top: 10%;text-align: center; width:100%; background-size: cover; display: block; height:700pt; background-color: #333; background-image: url('<?php echo $background_image_url?>')">
     <div class="glass-content" style="overflow: hidden">
         <div style="Left: 0pt; top: 50pt; position:absolute; height:800pt; background-position-x: 600pt; width:100%; background-repeat: no-repeat; background-image: url('<?php echo get_theme_mod('overlay_image_url')?>')"></div>
@@ -236,12 +236,12 @@ function drsounds_glass($background_image_url) {
             
             <?php
             $q = new WP_Query();
-            $q->query(array('post_type' => 'page', 'pagename' => 'about'));
+            $q->query(array('post_type' => 'page', 'pagename' => $page));
             while($q->have_posts()): $q->the_post();?>
             <div class="row">
                 
                 <div class="col-md-6" style="font-size: 20pt">
-                    <h1>Welcome</h1>
+                    <h1><?php the_title();?></h1>
                     <p><?php the_excerpt();?></p>
                 </div>
             </div>

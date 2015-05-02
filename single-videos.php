@@ -3,7 +3,7 @@
 <div class="glass glass-default" style="background-position: fixed; background-size: cover; background-image: url('<?php echo get_theme_mod('front_image_url')?>'); height:200pt;">
     <div class="glass-content">
         <div class="container">
-            <h1>Portfolio</h1>
+            <h1>Videos</h1>
         </div>
     </div>
 </div><?php
@@ -22,7 +22,8 @@ $url = get_post_meta($post->ID, 'url', TRUE);
                     <a href="<?php echo $url?>" class="btn btn-primary">Visit site</a>
                 </div>
                 <div class="col-md-6">
-                    <img src="<?php echo $image?>" width="100%">
+                    <iframe frameborder="0" src="<?php echo str_replace('watch?v=', 'embed/', $url)?>" style="width: 100%; height:250pt"></iframe>
+                        
                 </div>
             </div>
         </div>
