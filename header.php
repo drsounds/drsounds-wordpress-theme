@@ -3,12 +3,12 @@
     <head>
         <title>Test page</title>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-        <script src="<?php echo bloginfo('stylesheet_directory')?>js/jquery-1.11.2.js"></script>
+        <script src="<?php echo bloginfo('stylesheet_directory')?>/js/jquery-1.11.2.js"></script>
         <link rel="stylesheet" href="<?php echo get_stylesheet_uri(); ?>" type="text/css" media="screen" />
 
-        <script src="<?php echo bloginfo('stylesheet_directory')?>js/bootstrap.js"></script>
-        <script src="<?php echo bloginfo('stylesheet_directory')?>js/bootstrap3-typeahead.js"></script>
-        <script src="<?php echo bloginfo('stylesheet_directory')?>js/main.js"></script>
+        <script src="<?php echo bloginfo('stylesheet_directory')?>/js/bootstrap.js"></script>
+        <script src="<?php echo bloginfo('stylesheet_directory')?>/js/bootstrap3-typeahead.js"></script>
+        <script src="<?php echo bloginfo('stylesheet_directory')?>/js/main.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
         .icon {
@@ -26,14 +26,20 @@
         .menu-item {
           text-transform: uppercase;
         }
+        .navbar-transparent .nav li a {
+          color: white;
+        }
+        .navbar {
+          transition: background-color 1s, color 1s;
+        }
         </style>
         <?php wp_head();?>
     </head>
     <body>
       <?php if (is_admin_bar_showing()):?>
-      <div style="height: 10pt"></div>
+      <div style="height: 0pt"></div>
     <?php endif;?>
-        <nav class="navbar navbar-white navbar-fixed-top" style="<?php if (is_admin_bar_showing()):?>top:20pt<?php endif?>">
+        <nav class="navbar navbar-transparent navbar-fixed-top" style="<?php if (is_admin_bar_showing()):?>top:20pt<?php endif?>">
           <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -65,4 +71,20 @@
             </div><!-- /.navbar-collapse -->
           </div>
         </nav>
-        <div style="height: 30pt"></div>
+        <script>
+          (function($) {
+            $(document).ready(function(){
+                $(window).scroll(function () {
+                    var scrollY = jQuery(window).scrollTop();
+                    if (scrollY > 0) {
+                      $('.navbar').removeClass('navbar-transparent');
+                      $('.navbar').addClass('navbar-white');
+                    } else {
+                      $('.navbar').addClass('navbar-transparent');
+                      $('.navbar').removeClass('navbar-white');
+
+                    }
+                })
+              });
+          })(jQuery);
+        </script>

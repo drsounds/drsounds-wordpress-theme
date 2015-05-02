@@ -7,7 +7,10 @@ function wpss_admin_js() {
     wp_enqueue_media(); 
 }
  add_action('admin_enqueue_scripts', 'wpss_admin_js');
-
+add_action('enqueue_scripts', 'drsounds_enqueue_scripts');
+function drsounds_enqueue_scripts () {
+    wp_enqueue_script('jquery');
+}
 $post_types = array(
     'tracks' => array(
         'title' => 'Tracks',
@@ -62,8 +65,48 @@ $post_types = array(
                 'title' => 'Spotify URI'
             )
         )
+    ),
+    'videos' => array(
+        'title' => 'Video',
+        'meta_fields' => array(
+            'url' => array(
+                'title' => 'Video URL'
+            ),
+            'own' => array(
+                'title' => 'Own',
+                'type' => 'bool'
+            )
+        )
+    ),
+    'collaborations' => array(
+        'title' => 'Collaboration',
+        'meta_fields' => array(
+            'url' => array(
+                'title' => 'Video URL'
+            )
+        )
+    ),
+    'resume' => array(
+        'title' => 'Resumé',
+        'meta_fields' => array(
+            'duration' => array(
+                'title' => 'Duration'
+            )
+        )
     )
 );
+
+/*
+ * Calculate correct md that mateches the count of itesm
+ */
+function bootstrap_blockize($count) {
+    // max col md
+    $max_segments = 12;
+
+    $t = (12 / ($count)) * 2;
+    return $t;
+
+}
 
 $models = array(
     'track_relations' => array(
@@ -107,15 +150,15 @@ $taxonomies = array(
         'title' => 'Release'
     ),
     'industries' => array(
-        'for' => array('portfolio'),
+        'for' => array('portfolio', 'videos', 'resume'),
         'title' => 'Industry'
     ),
     'platforms' => array(
-        'for' => array('portfolio'),
+        'for' => array('portfolio', 'resume'),
         'title' => 'Platform'
     ),
     'genres' => array(
-        'for' => array('tracks', 'releases'),
+        'for' => array('tracks', 'releases', 'videos'),
         'title' => 'Genre'
     ),
     'labels' => array(
@@ -126,6 +169,10 @@ $taxonomies = array(
         'for' => 'tracks',
         'title' => 'Mood'
     ),
+    'languages' => array(
+        'for' => 'videos',
+        'title' => 'Language'
+    ),
     'bpm' => array(
         'for' => 'tracks',
         'title' => 'BPM'
@@ -134,13 +181,17 @@ $taxonomies = array(
         'for' => 'tracks',
         'title' => 'Collection'
     ),
-    'company' => array(
+    'companies' => array(
         'for' => array('portfolio', 'resume'),
         'title' => 'Company'
     ),
     'work_type' => array(
         'for' => 'portfolio',
         'title' => 'Work type'
+    ),
+    'roles' => array(
+        'for' => 'resume',
+        'title' => 'Role'
     )
 );
 
